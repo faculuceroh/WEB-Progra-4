@@ -676,7 +676,7 @@ window.openConsult = function (productName) {
   const waLink = modal.querySelector('a[href*="wa.me"]');
   if (waLink) {
     const msg = encodeURIComponent(`Hola SALBO! Quiero consultar sobre: ${productName}`);
-    waLink.href = `https://wa.me/5491100000000?text=${msg}`;
+    waLink.href = `https://wa.me/5491144394928?text=${msg}`;
   }
 };
 
