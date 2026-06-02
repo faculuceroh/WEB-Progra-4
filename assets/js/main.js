@@ -445,10 +445,11 @@
 /* ── Material search (real-time filter) ── */
 (function initMaterialSearch() {
   const input      = document.getElementById('materialSearch');
-  const clearBtn   = document.getElementById('clearSearch');
-  const countEl    = document.getElementById('searchCount');
-  const noResults  = document.getElementById('noResults');
-  const grid       = document.getElementById('materialsGrid');
+  const clearBtn     = document.getElementById('clearSearch');
+  const countEl      = document.getElementById('searchCount');
+  const noResults    = document.getElementById('noResults');
+  const noResultsBtn = document.getElementById('noResultsClear');
+  const grid         = document.getElementById('materialsGrid');
   if (!input || !grid) return;
 
   const allCards   = Array.from(grid.querySelectorAll('.mat-card'));
@@ -471,7 +472,9 @@
       if (match) visible++;
     });
 
-    noResults.hidden = visible > 0;
+    if (noResults)    noResults.hidden = visible > 0;
+    /* El botón "Ver todos los demás materiales" solo aparece cuando se busca */
+    if (noResultsBtn) noResultsBtn.hidden = !(visible === 0 && q);
     grid.style.display = visible === 0 ? 'none' : '';
     updateCount(visible);
     clearBtn.hidden = !q;
@@ -512,6 +515,7 @@
   const pills    = document.querySelectorAll('.filter-pill');
   const allCards = Array.from(document.querySelectorAll('.mat-card'));
   const noRes    = document.getElementById('noResults');
+  const noResBtn = document.getElementById('noResultsClear');
   const grid     = document.getElementById('materialsGrid');
   if (!pills.length) return;
 
@@ -522,8 +526,10 @@
       card.classList.toggle('hidden', !show);
       if (show) visible++;
     });
-    if (noRes) noRes.hidden = visible > 0;
-    if (grid)  grid.style.display = visible === 0 ? 'none' : '';
+    if (noRes)    noRes.hidden = visible > 0;
+    /* El botón es solo para búsquedas, no para filtros por categoría */
+    if (noResBtn) noResBtn.hidden = true;
+    if (grid)     grid.style.display = visible === 0 ? 'none' : '';
   }
 
   pills.forEach(pill => {
@@ -655,16 +661,14 @@ window.handleSearchSubmit = function (e) {
       return;
     }
 
-    /* ── Fallback: simulación (sin acción real) ── */
-    setTimeout(() => {
-      resetBtn();
-      onSuccess();
-    }, 1400);
+    /* ── Sin acción válida configurada: NO mostramos éxito (no se envió nada) ── */
+    resetBtn();
+    alert('El formulario no está configurado correctamente. Por favor escribinos por WhatsApp.');
   });
 })();
 
 /* ── Consult modal ── */
-window.openConsult = function (productName) {
+window.openConsult = function (productName, customMessage) {
   const modal = document.getElementById('consultModal');
   const pEl   = document.getElementById('modalProduct');
   if (!modal) return;
@@ -672,11 +676,22 @@ window.openConsult = function (productName) {
   modal.hidden = false;
   document.body.style.overflow = 'hidden';
 
-  /* Update WhatsApp link with product name */
+  /* Update WhatsApp link with a per-material personalized message.
+     If a card pasa un mensaje personalizado (2º argumento de openConsult),
+     se usa ese; si no, se arma una plantilla por defecto con emojis. */
   const waLink = modal.querySelector('a[href*="wa.me"]');
   if (waLink) {
-    const msg = encodeURIComponent(`Hola SALBO! Quiero consultar sobre: ${productName}`);
-    waLink.href = `https://wa.me/5491144394928?text=${msg}`;
+    const text = (customMessage && customMessage.trim())
+      ? customMessage
+      : `¡Hola SALBO!\n` +
+        `Quiero consultar por el siguiente material:\n\n` +
+        `*${productName}*\n\n` +
+        `Me gustaría saber:\n` +
+        `• Zona de entrega\n` +
+        `• Medida que buscaba\n` +
+        `• Cantidades\n\n` +
+        `¡Gracias!`;
+    waLink.href = `https://wa.me/5491144394928?text=${encodeURIComponent(text)}`;
   }
 };
 
