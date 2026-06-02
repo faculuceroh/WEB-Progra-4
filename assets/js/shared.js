@@ -167,7 +167,7 @@
                 Tu proveedor de confianza en materiales de construcción de calidad.
               </p>
               <div class="footer__social" role="list" aria-label="Redes sociales">
-                <a href="#" class="footer__social-link" aria-label="Instagram" role="listitem">
+                <a href="https://www.instagram.com/salboestructurasmetalicas/" class="footer__social-link" aria-label="Instagram" role="listitem">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
                        stroke-linejoin="round" aria-hidden="true">
@@ -176,7 +176,7 @@
                     <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
                   </svg>
                 </a>
-                <a href="#" class="footer__social-link" aria-label="Facebook" role="listitem">
+                <a href="https://www.facebook.com/profile.php?id=61566360036466&locale=es_LA" class="footer__social-link" aria-label="Facebook" role="listitem">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
                        stroke-linejoin="round" aria-hidden="true">
