@@ -664,7 +664,7 @@ window.handleSearchSubmit = function (e) {
 })();
 
 /* ── Consult modal ── */
-window.openConsult = function (productName) {
+window.openConsult = function (productName, customMessage) {
   const modal = document.getElementById('consultModal');
   const pEl   = document.getElementById('modalProduct');
   if (!modal) return;
@@ -672,11 +672,22 @@ window.openConsult = function (productName) {
   modal.hidden = false;
   document.body.style.overflow = 'hidden';
 
-  /* Update WhatsApp link with product name */
+  /* Update WhatsApp link with a per-material personalized message.
+     If a card pasa un mensaje personalizado (2º argumento de openConsult),
+     se usa ese; si no, se arma una plantilla por defecto con emojis. */
   const waLink = modal.querySelector('a[href*="wa.me"]');
   if (waLink) {
-    const msg = encodeURIComponent(`Hola SALBO! Quiero consultar sobre: ${productName}`);
-    waLink.href = `https://wa.me/5491144394928?text=${msg}`;
+    const text = (customMessage && customMessage.trim())
+      ? customMessage
+      : `¡Hola SALBO! 👋\n` +
+        `Quiero consultar por el siguiente material:\n\n` +
+        `🏗️ *${productName}*\n\n` +
+        `Me gustaría saber:\n` +
+        `• 💲 Precio\n` +
+        `• 📦 Disponibilidad / stock\n` +
+        `• 🚚 Envío a mi zona\n\n` +
+        `¡Gracias! 🙏`;
+    waLink.href = `https://wa.me/5491144394928?text=${encodeURIComponent(text)}`;
   }
 };
 
