@@ -679,14 +679,14 @@ window.openConsult = function (productName, customMessage) {
   if (waLink) {
     const text = (customMessage && customMessage.trim())
       ? customMessage
-      : `¡Hola SALBO! 👋\n` +
+      : `¡Hola SALBO!\n` +
         `Quiero consultar por el siguiente material:\n\n` +
-        `🏗️ *${productName}*\n\n` +
+        `*${productName}*\n\n` +
         `Me gustaría saber:\n` +
-        `• 💲 Precio\n` +
-        `• 📦 Disponibilidad / stock\n` +
-        `• 🚚 Envío a mi zona\n\n` +
-        `¡Gracias! 🙏`;
+        `• Zona de entrega\n` +
+        `• Medida que buscaba\n` +
+        `• Cantidades\n\n` +
+        `¡Gracias!`;
     waLink.href = `https://wa.me/5491144394928?text=${encodeURIComponent(text)}`;
   }
 };
