@@ -691,7 +691,7 @@ window.openConsult = function (productName, customMessage) {
         `• Medida que buscaba\n` +
         `• Cantidades\n\n` +
         `¡Gracias!`;
-    waLink.href = `https://wa.me/5491144394928?text=${encodeURIComponent(text)}`;
+    waLink.href = `https://wa.me/5491128482518?text=${encodeURIComponent(text)}`;
   }
 };
 
