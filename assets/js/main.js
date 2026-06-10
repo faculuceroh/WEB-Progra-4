@@ -676,22 +676,11 @@ window.openConsult = function (productName, customMessage) {
   modal.hidden = false;
   document.body.style.overflow = 'hidden';
 
-  /* Update WhatsApp link with a per-material personalized message.
-     If a card pasa un mensaje personalizado (2º argumento de openConsult),
-     se usa ese; si no, se arma una plantilla por defecto con emojis. */
+  /* El enlace de WhatsApp abre el chat sin mensaje predeterminado;
+     el cliente escribe lo que quiera. */
   const waLink = modal.querySelector('a[href*="wa.me"]');
   if (waLink) {
-    const text = (customMessage && customMessage.trim())
-      ? customMessage
-      : `¡Hola SALBO!\n` +
-        `Quiero consultar por el siguiente material:\n\n` +
-        `*${productName}*\n\n` +
-        `Me gustaría saber:\n` +
-        `• Zona de entrega\n` +
-        `• Medida que buscaba\n` +
-        `• Cantidades\n\n` +
-        `¡Gracias!`;
-    waLink.href = `https://wa.me/5491128482518?text=${encodeURIComponent(text)}`;
+    waLink.href = `https://wa.me/5491128482518`;
   }
 };
 
